@@ -40,13 +40,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($currencies->quoteCurrency as $key => $val)
-                                    <tr>
-                                        <td>{{ $currencies->currency }}</td>
-                                        <td>{{ $val->currency }}</td>
-                                        <td>{{ $val->rate }}</td>
-                                    </tr>
-                                @endforeach
+                                @if (!empty($currencies))
+                                    @foreach ($currencies->quoteCurrency as $key => $val)
+                                        <tr>
+                                            <td>{{ $currencies->currency }}</td>
+                                            <td>{{ $val->currency }}</td>
+                                            <td>{{ $val->rate }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

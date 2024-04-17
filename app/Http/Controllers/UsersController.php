@@ -18,7 +18,13 @@ class UsersController extends Controller
             abort(404);
         }
 
-        $users = User::get();
+        $users = User::with([
+                'role'
+            ])
+            ->whereHas('role', function($query){
+                $query->where('name', 'Staff');
+            })
+            ->get();
 
         return view('pages.users.index', compact('users'));
     }

@@ -17,14 +17,16 @@
                 </a>
             </li>
 
-            <li class="menu-item" aria-haspopup="true" >
-                <a href="{{ url('users') }}" class="menu-link ">
-                    <span class="menu-icon">
-                        <i class="flaticon2-user"></i>
-                    </span>
-                    <span class="menu-text">Users</span>
-                </a>
-            </li>
+            @if (Auth::user()->role->name == 'Admin')
+                <li class="menu-item" aria-haspopup="true" >
+                    <a href="{{ url('users') }}" class="menu-link ">
+                        <span class="menu-icon">
+                            <i class="flaticon2-user"></i>
+                        </span>
+                        <span class="menu-text">Users</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

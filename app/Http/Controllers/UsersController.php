@@ -14,6 +14,10 @@ class UsersController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->role->name != 'Admin'){
+            abort(404);
+        }
+
         $users = User::get();
 
         return view('pages.users.index', compact('users'));

@@ -20,7 +20,9 @@
                         <div class="card-title">
                             Exchange Rate
                             &nbsp;
-                            <small class="text-muted">({{ date('d F Y') }})</small>
+                            @if (!empty($currencies))
+                                <small class="text-muted">({{ $currencies->created_at->diffForHumans() }})</small>
+                            @endif
                         </div>
                         <div class="card-toolbar">
                             <button class="btn btn-primary btn-refresh">Refresh Price</button>
@@ -35,6 +37,15 @@
                                     <th>Price</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @foreach ($currencies->quoteCurrency as $key => $val)
+                                    <tr>
+                                        <td>{{ $currencies->currency }}</td>
+                                        <td>{{ $val->currency }}</td>
+                                        <td>{{ $val->rate }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -42,4 +53,45 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).on('click', '.btn-refresh', function(e){
+            e.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure you want to refresh price?",
+                text: "This will update the data permanently. You cannot undo this action",
+                icon: "info",
+                buttonsStyling: false,
+                confirmButtonText: "<i class='la la-thumbs-up'></i> Yes!",
+                showCancelButton: true,
+                cancelButtonText: "<i class='la la-thumbs-down'></i> No, thanks",
+                customClass: {
+                    confirmButton: "btn btn-danger",
+                    cancelButton: "btn btn-default"
+                }
+            }).then(function(isConfirm) {
+                if(isConfirm.isConfirmed){
+                    $.ajax({
+                        url: '{{ url("update-price") }}',
+                        type: 'POST',
+                        data: {
+                            "_token": '{{ csrf_token() }}'
+                        },
+                        success: function(data){
+                            if(data.redirect != null){
+                                window.location.replace(data.redirect);
+                            }
+                        },
+                        error: function(data){
+                            var result = data.responseJSON;
+                            toastr.error(result.message);
+                        }
+                    })
+                }
+            });
+        })
+    </script>
 @endsection

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth'])->group(function(){
     Route::get('', [App\Http\Controllers\DashboardController::class, 'index']);
+    Route::post('update-price', [App\Http\Controllers\DashboardController::class, 'updatePrice']);
 
     Route::group(['prefix' => 'users'], function(){
         Route::get('', [App\Http\Controllers\UsersController::class, 'index']);

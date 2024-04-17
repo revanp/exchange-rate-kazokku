@@ -1,7 +1,7 @@
 
 # Exchange Rate - Kazokku
 
-This app was created using Laravel 10, and SQLite. I'ts integrated with [exchangerate-api.com](https://www.exchangerate-api.com/) exchangerate-api.com to collect all the currencies and their rates.
+This app was created using Laravel 10, and SQLite. It's integrated with [exchangerate-api.com](https://www.exchangerate-api.com/) exchangerate-api.com to collect all the currencies and their rates.
 ## Installation
 
 Install this project with Docker

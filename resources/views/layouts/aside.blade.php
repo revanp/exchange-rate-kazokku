@@ -8,12 +8,21 @@
 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
     <div id="kt_aside_menu" class="aside-menu my-4 " data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
         <ul class="menu-nav ">
-            <li class="menu-item menu-item-active" aria-haspopup="true" >
-                <a  href="index.html" class="menu-link ">
+            <li class="menu-item" aria-haspopup="true" >
+                <a href="{{ url('') }}" class="menu-link ">
                     <span class="menu-icon">
                         <i class="flaticon2-dashboard"></i>
                     </span>
                     <span class="menu-text">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="menu-item" aria-haspopup="true" >
+                <a href="{{ url('users') }}" class="menu-link ">
+                    <span class="menu-icon">
+                        <i class="flaticon2-user"></i>
+                    </span>
+                    <span class="menu-text">Users</span>
                 </a>
             </li>
         </ul>
